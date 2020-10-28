@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.animation.addListener
@@ -15,6 +16,7 @@ import com.ttawatchai.tapbarwithball.ObjectClass2
 import com.ttawatchai.tapbarwithball.R
 import kotlin.math.abs
 import kotlin.math.floor
+
 
 open class TabViewHelper : View {
 
@@ -74,10 +76,12 @@ open class TabViewHelper : View {
 //  paint.textSize = 12F
 
     private val unSelectTabText: Paint by lazy {
+        val spSize = 14
+        val scaledSizeInPixels = spSize * resources.displayMetrics.scaledDensity
         Paint().apply {
             color = Color.BLACK
             style = Paint.Style.FILL
-            textSize = 38F
+            textSize = scaledSizeInPixels
         }
     }
 
@@ -92,12 +96,20 @@ open class TabViewHelper : View {
     private val itemWidth: Float
         get() {
             val width = this.width / numberOfTabs
-            return width / 2.1F
+            return width
         }
 
     private val sectionWidth: Float
         get() {
             return width / numberOfTabs
+        }
+    private val sectionHight: Float
+        get() {
+            val tv = TypedValue()
+            if (context.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+                return TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics).toFloat().also { Log.d("height",it.toString()) }
+            }
+            return 0F
         }
 
     private val numberOfTabs: Float
@@ -107,13 +119,13 @@ open class TabViewHelper : View {
 
     private val itemHeight: Float
         get() {
-            val height = this.height
+            val height = sectionHight
             return if (height > ballSize) ballSize else height.toFloat()
         }
 
     private val ballSize: Float
         get() {
-            return itemWidth / 2
+            return itemWidth / 4
         }
 
     private var tabAnimationPercentage = 1F
@@ -139,9 +151,9 @@ open class TabViewHelper : View {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-      context,
-      attrs,
-      defStyleAttr
+        context,
+        attrs,
+        defStyleAttr
     ) {
         setupAttributes(attrs)
     }
@@ -153,14 +165,14 @@ open class TabViewHelper : View {
         ballColor =
             typedArray.getColor(R.styleable.AMTabView_ballColor, Color.parseColor("#C07298"))
         selectedTabTintColor = typedArray.getColor(
-          R.styleable.AMTabView_selectedTabTintColor, Color.parseColor(
-            "#FFFFFF"
-          )
+            R.styleable.AMTabView_selectedTabTintColor, Color.parseColor(
+                "#FFFFFF"
+            )
         )
         unSelectedTabTintColor = typedArray.getColor(
-          R.styleable.AMTabView_unSelectedTabTintColor, Color.parseColor(
-            "#000000"
-          )
+            R.styleable.AMTabView_unSelectedTabTintColor, Color.parseColor(
+                "#000000"
+            )
         )
     }
 
@@ -232,12 +244,13 @@ open class TabViewHelper : View {
                 invalidate()
             }
             addListener(onEnd = {
-              completion()
+                completion()
             })
             duration = 200L
             start()
         }
     }
+
 
     //endregion
 
@@ -260,14 +273,14 @@ open class TabViewHelper : View {
                 val x =
                     (it.index * sectionWidth) + (sectionWidth / 2) - (it.value.drawable.width / 2)
                 val yText =
-                    if (isSelectedIndex) (0F) else ((height / 1.25)).toFloat()
+                    if (isSelectedIndex) (0F) else ((height / 1.15)).toFloat()
                 val paint = if (isSelectedIndex) selectedTabTintPaint else unSelectedTabTintPaint
                 val paintText = if (isSelectedIndex) selectTabText else unSelectTabText
                 paintText.getTextBounds(it.value.title, 0, it.value.title.length, bounds);
                 val xText =
-                    if (bounds.width() < sectionWidth) ((it.index * sectionWidth) + ((sectionWidth-bounds.width()) / 2)) else (0F)
+                    if (bounds.width() < sectionWidth) ((it.index * sectionWidth) + ((sectionWidth - bounds.width()) / 2)) else (0F)
 
-                Log.d("xtext", it.index.toString()+":"+bounds.width().toString() + ":" +xText)
+                Log.d("xtext", it.index.toString() + ":" + bounds.width().toString() + ":" + xText)
                 canvas?.drawBitmap(it.value.drawable, x, y, paint)
                 canvas?.drawText(it.value.title, xText, yText, paintText)
 
@@ -298,27 +311,28 @@ open class TabViewHelper : View {
     }
 
     private fun holePathForSelectedIndex(): Path {
-        val sectionHeight = height * 1.5F
+        val sectionWidth = itemWidth
+        val sectionHeight = (sectionHight +(ballSize*2.1F)).also {   Log.d("height_after",it.toString())}
         return Path().apply {
             moveTo(0F, 0F)
-            lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
+            lineTo(((selectedTabIndex * sectionWidth)- (sectionWidth*0.3 )).toFloat(), 0F)
             quadTo(
-              ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat(),
-              0F * tabAnimationPercentage,
-              ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat(),
-              (itemHeight * 0.5).toFloat() * tabAnimationPercentage
+                ((selectedTabIndex * sectionWidth)  + (sectionWidth * 0.1)).toFloat(),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat(),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-              ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat(),
-              (sectionHeight * 0.75).toFloat() * tabAnimationPercentage,
-              ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat(),
-              (itemHeight * 0.5).toFloat() * tabAnimationPercentage
+                ((selectedTabIndex * sectionWidth)  + (sectionWidth * 0.5)).toFloat(),
+                (sectionHeight * 0.75).toFloat() * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat(),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-              ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat(),
-              0F * tabAnimationPercentage,
-              ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat(),
-              0F * tabAnimationPercentage
+                ((selectedTabIndex * sectionWidth)  + (sectionWidth*0.9 )).toFloat(),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat(),
+                0F * tabAnimationPercentage
             )
             lineTo(width.toFloat(), 0F)
             lineTo(width.toFloat(), sectionHeight)

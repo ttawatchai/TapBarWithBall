@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     val icons = mutableListOf(
     ObjectClass("หน้าหลัก",R.drawable.ic_action_tab1),
-    ObjectClass("เมนูทั้งหมด",R.drawable.ic_action_tab2),
-    ObjectClass("คำสั่งซื้อ",R.drawable.ic_action_tab3),
+    ObjectClass("สาขา",R.drawable.ic_action_tab3),
+    ObjectClass("สาขา",R.drawable.ic_action_tab3),
     ObjectClass("สาขา",R.drawable.ic_action_tab3),
     ObjectClass("ฉัน",R.drawable.ic_action_tab4)
     )
