@@ -323,15 +323,15 @@ open class TabViewHelper : View {
                 (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat()+(ballSize*0.1F),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat(),
                 (sectionHeight * 0.75).toFloat() * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat()+(ballSize*0.5F),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth *0.9)).toFloat(),
                 (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()+(ballSize*0.5F),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth*0.75)).toFloat()+(ballSize),
                 0F * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat()+(ballSize*0.5F),
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.2)).toFloat()+(ballSize*2),
                 0F * tabAnimationPercentage
             )
             lineTo(width.toFloat(), 0F)
