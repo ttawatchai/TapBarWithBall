@@ -125,7 +125,7 @@ open class TabViewHelper : View {
 
     private val ballSize: Float
         get() {
-            return itemWidth / 4
+            return sectionWidth / 4F
         }
 
     private var tabAnimationPercentage = 1F
@@ -311,27 +311,27 @@ open class TabViewHelper : View {
     }
 
     private fun holePathForSelectedIndex(): Path {
-        val sectionWidth = itemWidth
-        val sectionHeight = (sectionHight +(ballSize*2.1F)).also {   Log.d("height_after",it.toString())}
+        val sectionWidth = sectionWidth
+        val sectionHeight = (sectionHight +(ballSize*1.75F)).also {   Log.d("height_after",it.toString())}
         return Path().apply {
             moveTo(0F, 0F)
-            lineTo(((selectedTabIndex * sectionWidth)- (sectionWidth*0.3 )).toFloat(), 0F)
+            lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
             quadTo(
-                ((selectedTabIndex * sectionWidth)  + (sectionWidth * 0.1)).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat()-(ballSize*0.5F),
                 0F * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat()-(ballSize*0.5F),
                 (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                ((selectedTabIndex * sectionWidth)  + (sectionWidth * 0.5)).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat()+(ballSize*0.1F),
                 (sectionHeight * 0.75).toFloat() * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat()+(ballSize*0.5F),
                 (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                ((selectedTabIndex * sectionWidth)  + (sectionWidth*0.9 )).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()+(ballSize*0.5F),
                 0F * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat(),
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat()+(ballSize*0.5F),
                 0F * tabAnimationPercentage
             )
             lineTo(width.toFloat(), 0F)
