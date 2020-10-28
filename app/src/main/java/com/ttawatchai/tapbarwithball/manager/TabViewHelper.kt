@@ -312,7 +312,7 @@ open class TabViewHelper : View {
 
     private fun holePathForSelectedIndex(): Path {
         val sectionWidth = sectionWidth
-        val sectionHeight = (sectionHight +(ballSize*1.75F)).also {   Log.d("height_after",it.toString())}
+        val sectionHeight = (sectionHight +(ballSize*1.5F)).also {   Log.d("height_after",it.toString())}
         return Path().apply {
             moveTo(0F, 0F)
             lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
