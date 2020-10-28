@@ -14,10 +14,11 @@ class MainActivity : AppCompatActivity() {
     replaceFragmentWith(R.drawable.ic_action_tab1)
 
     val icons = mutableListOf(
-      R.drawable.ic_action_tab1,
-      R.drawable.ic_action_tab2,
-      R.drawable.ic_action_tab3,
-      R.drawable.ic_action_tab4
+    ObjectClass("หน้าหลัก",R.drawable.ic_action_tab1),
+    ObjectClass("เมนูทั้งหมด",R.drawable.ic_action_tab2),
+    ObjectClass("คำสั่งซื้อ",R.drawable.ic_action_tab3),
+    ObjectClass("สาขา",R.drawable.ic_action_tab3),
+    ObjectClass("ฉัน",R.drawable.ic_action_tab4)
     )
 
     // set the tab images.
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     // listen for tab changes.
     tabView.onTabChangeListener = {
-      replaceFragmentWith(icons[it])
+      replaceFragmentWith(icons[it].drawable)
     }
 
   }
