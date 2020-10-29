@@ -280,10 +280,8 @@ open class TabViewHelper : View {
                 val xText =
                     if (bounds.width() < sectionWidth) ((it.index * sectionWidth) + ((sectionWidth - bounds.width()) / 2)) else (0F)
 
-                Log.d("xtext", it.index.toString() + ":" + bounds.width().toString() + ":" + xText)
                 canvas?.drawBitmap(it.value.drawable, x, y, paint)
                 canvas?.drawText(it.value.title, xText, yText, paintText)
-
 
             }
     }
@@ -312,7 +310,7 @@ open class TabViewHelper : View {
 
     private fun holePathForSelectedIndex1(): Path {
         val sectionWidth = sectionWidth
-        val sectionHeight = (sectionHight +(ballSize*1.5F)).also {   Log.d("height_after",it.toString())}
+        val sectionHeight = (sectionHight +(ballSize*1.5F))
         return Path().apply {
             moveTo(0F, 0F)
             lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
@@ -344,7 +342,7 @@ open class TabViewHelper : View {
 
     private fun holePathForSelectedIndex(): Path {
         val sectionWidth = sectionWidth
-        val sectionHeight = (sectionHight +(ballSize*1.5F)).also {   Log.d("height_after",it.toString())}
+        val sectionHeight = (sectionHight +(ballSize*1.5F))
         return Path().apply {
             moveTo(0F, 0F)
             lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
@@ -376,7 +374,7 @@ open class TabViewHelper : View {
                 ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.2)).toFloat()+(itemWidth*0.1F).also { Log.d(
                     "ballx x2 : "+selectedTabIndex.toString(),it.toString()) },
                 0F * tabAnimationPercentage.also { Log.d(
-                    "ballx y2 : $selectedTabIndex","this") }
+                    "ballx y2 : $selectedTabIndex",it.toString()) }
             )
             lineTo(width.toFloat(), 0F)
             lineTo(width.toFloat(), sectionHeight)
