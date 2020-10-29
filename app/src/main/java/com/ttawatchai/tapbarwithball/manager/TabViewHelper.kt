@@ -363,17 +363,17 @@ open class TabViewHelper : View {
                     "ballx x1 : "+selectedTabIndex.toString(),it.toString()) },
                 (sectionHeight * 0.75).toFloat() * tabAnimationPercentage.also { Log.d(
                     "ballx y1 : "+selectedTabIndex.toString(),it.toString()) },
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat()+(ballSize*0.5F).also { Log.d(
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat()+(ballSize*0.45F).also { Log.d(
                     "ballx x2 : "+selectedTabIndex.toString(),it.toString()) },
                 (itemHeight * 0.5).toFloat() * tabAnimationPercentage.also { Log.d(
                     "ballx y2 : "+selectedTabIndex.toString(),it.toString()) }
             )
             quadTo(
-                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat())+(ballSize*0.7F).also { Log.d(
+                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat())+(ballSize*0.6F).also { Log.d(
                     "ballx x1 : "+selectedTabIndex.toString(),it.toString()) },
                 0F * tabAnimationPercentage.also { Log.d(
                     "ballx y1 : "+selectedTabIndex.toString(),it.toString()) },
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.3)).toFloat().also { Log.d(
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.2)).toFloat().also { Log.d(
                     "ballx x2 : "+selectedTabIndex.toString(),it.toString()) },
                 0F * tabAnimationPercentage.also { Log.d(
                     "ballx y2 : $selectedTabIndex","this") }
