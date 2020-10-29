@@ -369,7 +369,7 @@ open class TabViewHelper : View {
                     "ballx y2 : "+selectedTabIndex.toString(),it.toString()) }
             )
             quadTo(
-                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat())+(itemWidth*0.25F).also { Log.d(
+                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat())+(itemWidth*0.3F).also { Log.d(
                     "ballx x1 : "+selectedTabIndex.toString(),it.toString()) },
                 0F * tabAnimationPercentage.also { Log.d(
                     "ballx y1 : "+selectedTabIndex.toString(),it.toString()) },
