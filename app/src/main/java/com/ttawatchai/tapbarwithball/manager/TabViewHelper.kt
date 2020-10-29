@@ -125,7 +125,7 @@ open class TabViewHelper : View {
 
     private val ballSize: Float
         get() {
-            return sectionWidth / 2.5F
+            return sectionWidth / 3F
         }
 
     private var tabAnimationPercentage = 1F
@@ -261,7 +261,7 @@ open class TabViewHelper : View {
         super.onDraw(canvas)
 
         canvas?.drawPath(holePathForSelectedIndex(), tabPaint)
-        canvas?.drawCircle(ballX, ballY + ballSize / 5F, ballSize, ballPaint)
+        canvas?.drawCircle(ballX, ballY+sectionHight*0.2F, ballSize, ballPaint)
 
         bitmapsIcons
             .withIndex()
