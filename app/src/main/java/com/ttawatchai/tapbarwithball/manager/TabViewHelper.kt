@@ -3,7 +3,6 @@ package com.ttawatchai.tapbarwithball.manager
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -59,14 +58,14 @@ open class TabViewHelper : View {
 
     private val unSelectedTabTintPaint: Paint by lazy {
         Paint().apply {
-            colorFilter = PorterDuffColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
+//            colorFilter = PorterDuffColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
             color = unSelectedTabTintColor
         }
     }
 
     private val selectedTabTintPaint: Paint by lazy {
         Paint().apply {
-            colorFilter = PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+//            colorFilter = PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
             color = selectedTabTintColor
         }
     }
@@ -134,7 +133,7 @@ open class TabViewHelper : View {
 
     private val ballSize: Float
         get() {
-            return sectionWidth / 3F
+            return sectionWidth / 2.25F
         }
 
     private var tabAnimationPercentage = 1F
@@ -324,38 +323,6 @@ open class TabViewHelper : View {
         return Triple(fromX, toX, controlPointY)
     }
 
-    private fun holePathForSelectedIndex1(): Path {
-        val sectionWidth = sectionWidth
-        val sectionHeight = (sectionHight + (ballSize * 1.5F))
-        return Path().apply {
-            moveTo(0F, 0F)
-            lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
-            quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat() - (ballSize * 0.5F),
-                0F * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat() - (ballSize * 0.5F),
-                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
-            )
-            quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat(),
-                (sectionHeight * 0.75).toFloat() * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat(),
-                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
-            )
-            quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.75)).toFloat() + (ballSize),
-                0F * tabAnimationPercentage,
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.2)).toFloat() + (ballSize * 2),
-                0F * tabAnimationPercentage
-            )
-            lineTo(width.toFloat(), 0F)
-            lineTo(width.toFloat(), sectionHeight)
-            lineTo(0F, sectionHeight)
-            lineTo(0F, 0F)
-            close()
-        }
-    }
-
     private fun holePathForSelectedIndex(): Path {
         val sectionWidth = sectionWidth
         val sectionHeight = (sectionHight + (ballSize * 1.5F))
@@ -395,7 +362,7 @@ open class TabViewHelper : View {
                         "ballx y1 : " + selectedTabIndex.toString(), it.toString()
                     )
                 },
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.85)).toFloat() + (itemWidth * 0.2F).also {
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat() + (itemWidth * 0.22F).also {
                     Log.d(
                         "ballx x2 : " + selectedTabIndex.toString(), it.toString()
                     )
@@ -407,7 +374,7 @@ open class TabViewHelper : View {
                 }
             )
             quadTo(
-                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (itemWidth * 0.3F).also {
+                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (itemWidth * 0.27F).also {
                     Log.d(
                         "ballx x1 : " + selectedTabIndex.toString(), it.toString()
                     )
@@ -417,7 +384,7 @@ open class TabViewHelper : View {
                         "ballx y1 : " + selectedTabIndex.toString(), it.toString()
                     )
                 },
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.2)).toFloat() + (itemWidth * 0.1F).also {
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat() .also {
                     Log.d(
                         "ballx x2 : " + selectedTabIndex.toString(), it.toString()
                     )
