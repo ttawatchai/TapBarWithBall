@@ -82,7 +82,7 @@ open class TabViewHelper : View {
         val spSize = 14
         val scaledSizeInPixels = spSize * resources.displayMetrics.scaledDensity
         Paint().apply {
-            color = Color.BLACK
+            color = Color.WHITE
             style = Paint.Style.FILL
             textSize = scaledSizeInPixels
         }
@@ -90,7 +90,7 @@ open class TabViewHelper : View {
 
     private val selectTabText: Paint by lazy {
         Paint().apply {
-            color = Color.BLACK
+            color = Color.WHITE
             style = Paint.Style.FILL
             textSize = 0F
         }
@@ -170,7 +170,7 @@ open class TabViewHelper : View {
 
     private fun setupAttributes(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.AMTabView, 0, 0)
-        tabColor = typedArray.getColor(R.styleable.AMTabView_tabColor, Color.parseColor("#FFFFFF"))
+        tabColor = typedArray.getColor(R.styleable.AMTabView_tabColor, Color.parseColor("#07891F"))
         ballColor =
             typedArray.getColor(R.styleable.AMTabView_ballColor, Color.parseColor("#C07298"))
         selectedTabTintColor = typedArray.getColor(
