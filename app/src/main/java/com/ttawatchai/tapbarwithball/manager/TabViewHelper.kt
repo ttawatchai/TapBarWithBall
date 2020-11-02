@@ -28,6 +28,7 @@ open class TabViewHelper : View {
             addTabsImages()
         }
 
+    var tabletSize = resources.getBoolean(R.bool.isTablet)
 
     open var selectedTabIndex: Float = 0F
         set(value) {
@@ -70,7 +71,7 @@ open class TabViewHelper : View {
     }
 
     private val unSelectTabText: Paint by lazy {
-        val spSize = 14
+        val spSize = if(tabletSize)(18) else 14
         val scaledSizeInPixels = spSize * resources.displayMetrics.scaledDensity
         Paint().apply {
             color = Color.WHITE
@@ -268,7 +269,11 @@ open class TabViewHelper : View {
             ballY - ballSize + sectionHight * 0.2F,
             ballPaint
         )
-        canvas?.drawPath(holePathForSelectedIndex(), tabPaint)
+        when {tabletSize -> {
+                canvas?.drawPath(holePathForSelectedIndexForTablet(), tabPaint)
+            }
+            else -> canvas?.drawPath(holePathForSelectedIndex(), tabPaint)
+        }
 
         bitmapsIcons
             .withIndex()
@@ -335,6 +340,38 @@ open class TabViewHelper : View {
             )
             quadTo(
                 (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (itemWidth * 0.27F),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat(),
+                0F * tabAnimationPercentage
+            )
+            lineTo(width.toFloat(), 0F)
+            lineTo(width.toFloat(), sectionHeight)
+            lineTo(0F, sectionHeight)
+            lineTo(0F, 0F)
+            close()
+        }
+    }
+
+    private fun holePathForSelectedIndexForTablet(): Path {
+        val sectionWidth = sectionWidth
+        val sectionHeight = (sectionHight + (ballSize * 1.5F))
+        return Path().apply {
+            moveTo(0F, 0F)
+            lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
+            quadTo(
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat() - (ballSize * 0.2F),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat() - (ballSize * 0.2F),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
+            )
+            quadTo(
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat(),
+                (sectionHeight * 0.75).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat() + (ballSize * 0.2F),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
+            )
+            quadTo(
+                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (ballSize * 0.3F),
                 0F * tabAnimationPercentage,
                 ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat(),
                 0F * tabAnimationPercentage

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="isTablet">false</bool>
+    <bool name="isTablet">true</bool>
     <declare-styleable name="AMTabView">
         <attr name="tabColor" format="color" />
         <attr name="ballColor" format="color" />
