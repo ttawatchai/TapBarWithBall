@@ -131,9 +131,10 @@ open class TabViewHelper : View {
             return if (height > ballSize) ballSize else height.toFloat()
         }
 
+
     private val ballSize: Float
         get() {
-            return sectionWidth / 2.25F
+            return 30 * resources.displayMetrics.scaledDensity
         }
 
     private var tabAnimationPercentage = 1F
@@ -270,11 +271,16 @@ open class TabViewHelper : View {
 
         val shape = ContextCompat.getDrawable(context, R.drawable.circle);
         val bitmap =
-            Bitmap.createBitmap(ballSize.toInt()*2, ballSize.toInt()*2, Bitmap.Config.ARGB_8888)
+            Bitmap.createBitmap(ballSize.toInt() * 2, ballSize.toInt() * 2, Bitmap.Config.ARGB_8888)
         val canvasCircle = Canvas(bitmap)
         shape?.setBounds(0, 0, bitmap.width, bitmap.height)
         shape?.draw(canvasCircle)
-        canvas?.drawBitmap(bitmap,ballX-ballSize,ballY-ballSize + sectionHight * 0.2F,ballPaint)
+        canvas?.drawBitmap(
+            bitmap,
+            ballX - ballSize,
+            ballY - ballSize + sectionHight * 0.2F,
+            ballPaint
+        )
         canvas?.drawPath(holePathForSelectedIndex(), tabPaint)
 //        canvas?.drawCircle(ballX, ballY + sectionHight * 0.2F, ballSize, ballPaint)
 
@@ -384,11 +390,12 @@ open class TabViewHelper : View {
                         "ballx y1 : " + selectedTabIndex.toString(), it.toString()
                     )
                 },
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat() .also {
-                    Log.d(
-                        "ballx x2 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat()
+                    .also {
+                        Log.d(
+                            "ballx x2 : " + selectedTabIndex.toString(), it.toString()
+                        )
+                    },
                 0F * tabAnimationPercentage.also {
                     Log.d(
                         "ballx y2 : $selectedTabIndex", it.toString()
