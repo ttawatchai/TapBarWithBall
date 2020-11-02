@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
@@ -70,13 +69,6 @@ open class TabViewHelper : View {
         }
     }
 
-//  paint.color = Color.WHITE
-//  paint.style = Paint.Style.FILL
-//  canvas!!.drawPaint(paint)
-//
-//  paint.color = Color.BLACK
-//  paint.textSize = 12F
-
     private val unSelectTabText: Paint by lazy {
         val spSize = 14
         val scaledSizeInPixels = spSize * resources.displayMetrics.scaledDensity
@@ -110,12 +102,7 @@ open class TabViewHelper : View {
             val tv = TypedValue()
             if (context.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
                 return TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
-                    .toFloat().also {
-                        Log.d(
-                            "height",
-                            it.toString()
-                        )
-                    }
+                    .toFloat()
             }
             return 0F
         }
@@ -282,7 +269,6 @@ open class TabViewHelper : View {
             ballPaint
         )
         canvas?.drawPath(holePathForSelectedIndex(), tabPaint)
-//        canvas?.drawCircle(ballX, ballY + sectionHight * 0.2F, ballSize, ballPaint)
 
         bitmapsIcons
             .withIndex()
@@ -336,71 +322,22 @@ open class TabViewHelper : View {
             moveTo(0F, 0F)
             lineTo(((selectedTabIndex * sectionWidth) - (sectionWidth * 0.3)).toFloat(), 0F)
             quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat() - (itemWidth * 0.25F).also {
-                    Log.d(
-                        "ballx x1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                0F * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat() - (itemWidth * 0.25F).also {
-                    Log.d(
-                        "ballx x2 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                (itemHeight * 0.5).toFloat() * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y2 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                }
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.1)).toFloat() - (itemWidth * 0.25F),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.2)).toFloat() - (itemWidth * 0.25F),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat().also {
-                    Log.d(
-                        "ballx x1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                (sectionHeight * 0.75).toFloat() * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat() + (itemWidth * 0.22F).also {
-                    Log.d(
-                        "ballx x2 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                (itemHeight * 0.5).toFloat() * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y2 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                }
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.5)).toFloat(),
+                (sectionHeight * 0.75).toFloat(),
+                ((selectedTabIndex * sectionWidth) + (sectionWidth * 0.8)).toFloat() + (itemWidth * 0.22F),
+                (itemHeight * 0.5).toFloat() * tabAnimationPercentage
             )
             quadTo(
-                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (itemWidth * 0.27F).also {
-                    Log.d(
-                        "ballx x1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                0F * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y1 : " + selectedTabIndex.toString(), it.toString()
-                    )
-                },
-                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat()
-                    .also {
-                        Log.d(
-                            "ballx x2 : " + selectedTabIndex.toString(), it.toString()
-                        )
-                    },
-                0F * tabAnimationPercentage.also {
-                    Log.d(
-                        "ballx y2 : $selectedTabIndex", it.toString()
-                    )
-                }
+                (((selectedTabIndex * sectionWidth) + (sectionWidth * 0.9)).toFloat()) + (itemWidth * 0.27F),
+                0F * tabAnimationPercentage,
+                ((selectedTabIndex * sectionWidth) + sectionWidth + (sectionWidth * 0.27)).toFloat(),
+                0F * tabAnimationPercentage
             )
             lineTo(width.toFloat(), 0F)
             lineTo(width.toFloat(), sectionHeight)
